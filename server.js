@@ -42,6 +42,16 @@ hbs.registerHelper('getCurrentYear', () => {
 	//return 'test';
 	return new Date().getFullYear();
 });
+
+hbs.registerHelper('lastUpdateDate', () => {
+	var currentDate = new Date()
+	var day = currentDate.getDate()
+	var month = currentDate.getMonth() + 1
+	var year = currentDate.getFullYear()
+	return (day + "/" + month + "/" + year);
+		
+});
+
 hbs.registerHelper('screamIt', (text) => {
 	return text.toUpperCase();
 });
@@ -64,9 +74,21 @@ app.get('/', (req, res) => {
 	})
 });
 
+
+app.get('/project', (req, res) => {
+
+	res.render('project.hbs', {
+		pageTitle: 'My Project Page',
+		currentYear: new Date().getFullYear(),
+		projectMessage: "From here we get into the parts of the project"
+		
+
+	})
+});
+
 app.get('/about', (req, res) => {
 	// render with template view engine
-	res.render('about.hbs', {
+		res.render('about.hbs', {
 		pageTitle: 'About Page Sven',
 		currentYear: new Date().getFullYear()
 	});
